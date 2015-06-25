@@ -7,7 +7,7 @@
     <ProjectGuid>{5C7BBF24-71FB-431B-819D-5289442950F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>sp_tools</RootNamespace>
+    <RootNamespace>SpTools</RootNamespace>
     <AssemblyName>sp-tools</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

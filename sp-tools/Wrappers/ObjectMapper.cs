@@ -1,14 +1,5 @@
-﻿#region File Description & License
-// ****************************************************************
-// DESC: ObjectMapper.cs implementation.
-// 
-// © 2013 McGraw-Hill Education
-// ****************************************************************
-#endregion
-
-using Tegrity.Internal.Contract.Mapping;
-
-namespace Tegrity.Internal.Platform.Mapping
+﻿
+namespace SpTools.Wrappers
 {
 	/// <summary>
 	/// Maps objects using AutoMapper.

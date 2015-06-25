@@ -1,26 +1,14 @@
-﻿#region File Description & License
-// ****************************************************************
-// DESC: StringBytesArrayTypeConvertor.cs implementation.
-//  
-// © 2013 McGraw-Hill Education
-// ****************************************************************
-#endregion
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Tegrity.Utilities
+namespace SpTools.Comparision
 {
 	/// <summary>
 	/// Converts the value of an string type into a byte array type
 	/// </summary>
 	public class StringBytesArrayTypeConverter : TypeConverter
 	{
-		////////////////////////////////////////////////////////////
-		// Public Methods/Atributes
-		////////////////////////////////////////////////////////////
-		
 		/// <summary>
 		/// Gets a value indicating whether this converter can convert an object to the given destination type using the context.
         /// </summary>

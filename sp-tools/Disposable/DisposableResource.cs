@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jet.Puzzles.Disposable
+namespace SpTools.Disposable
 {
 	/// <summary>
 	/// Base class for disposable resources wrappers which make really 'feng shui' disposing.

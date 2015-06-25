@@ -1,22 +1,11 @@
-﻿#region File Description & License
-// ****************************************************************
-// DESC: ComparableBase.cs implementation.
-//  
-// © 2013 McGraw-Hill Education
-// ****************************************************************
-#endregion
-
-namespace Tegrity.Utilities
+﻿namespace SpTools.Comparision
 {
 	/// <summary>
-	/// Base class for which simplifies obkect's comparision
+	/// Base class for which simplifies implementation of object's comparision
 	/// </summary>
 	/// <typeparam name="TRealType">Real type of the object</typeparam>
 	public abstract class ComparableBase<TRealType>
 	{
-		////////////////////////////////////////////////////////////
-		// Public Methods/Atributes
-		////////////////////////////////////////////////////////////
 		/// <summary>
 		/// <see cref="object.Equals(object)"/>
 		/// </summary>
@@ -46,9 +35,6 @@ namespace Tegrity.Utilities
 		}
 
 
-		////////////////////////////////////////////////////////////
-		// Protected Methods/Atributes
-		////////////////////////////////////////////////////////////
 		/// <summary>
 		/// Compare current enity with passed into arguments
 		/// </summary>
@@ -57,7 +43,6 @@ namespace Tegrity.Utilities
 		/// <summary>
 		/// Should be overrided to get hash code
 		/// </summary>
-		/// <returns></returns>
 		protected abstract int GetHash();
 
 	}

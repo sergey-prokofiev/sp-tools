@@ -1,26 +1,15 @@
-﻿#region File Description & License
-// ****************************************************************
-// DESC: ExpressionUtils.cs implementation.
-//  
-// © 2013 McGraw-Hill Education
-// ****************************************************************
-#endregion
-
-using System;
+﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using SpTools.Validation;
 
-namespace Tegrity.Utilities
+namespace SpTools.Expression
 {
 	/// <summary>
 	/// Expression utils.
 	/// </summary>
 	public static class ExpressionUtils 
 	{
-		////////////////////////////////////////////////////////////
-		// Public Methods/Atributes
-		////////////////////////////////////////////////////////////
-
 		/// <summary>
 		/// Joins two expressions with logical And.
 		/// </summary>
@@ -30,8 +19,8 @@ namespace Tegrity.Utilities
 		/// <returns>Join of two expressions with logical And.</returns>
 		public static Expression<Func<T, bool>> And<T>(Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
 		{
-			var andExpression = Expression.And(first.Body, second.Body);
-			var result = Expression.Lambda<Func<T, bool>>(andExpression, first.Parameters[0]);
+			var andExpression = System.Linq.Expressions.Expression.And(first.Body, second.Body);
+			var result = System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(andExpression, first.Parameters[0]);
 			return result;
 		}
 
@@ -89,11 +78,11 @@ namespace Tegrity.Utilities
 			Validator.IsNotNull(property, () => property);
 			Validator.IsNotNull(value, () => value);
 
-			var parameter = Expression.Parameter(typeof(T), "x");
-			var propertyExpression = Expression.MakeMemberAccess(parameter, property);
-			var constExpression = Expression.Constant(value, value.GetType());
-			var body = Expression.Equal(propertyExpression, constExpression);
-			var result = Expression.Lambda<Func<T, bool>>(body, parameter);
+			var parameter = System.Linq.Expressions.Expression.Parameter(typeof(T), "x");
+			var propertyExpression = System.Linq.Expressions.Expression.MakeMemberAccess(parameter, property);
+			var constExpression = System.Linq.Expressions.Expression.Constant(value, value.GetType());
+			var body = System.Linq.Expressions.Expression.Equal(propertyExpression, constExpression);
+			var result = System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(body, parameter);
 			return result;
 		}
 	}

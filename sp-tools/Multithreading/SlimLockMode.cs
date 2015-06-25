@@ -1,4 +1,4 @@
-﻿namespace Jet.Puzzles.Multithreading
+﻿namespace SpTools.Multithreading
 {
 	/// <summary>
 	/// Type of lock

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Security;
-using NLog;
 
-namespace Jet.Puzzles.Disposable
+namespace SpTools.Disposable
 {
 	/// <summary>
 	/// Wrapper which help to decrypt security string to common string.

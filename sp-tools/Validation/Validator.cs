@@ -1,27 +1,15 @@
-﻿#region File Description & License
-// ****************************************************************
-// DESC: Validator.cs implementation.
-// 
-// © 2013 McGraw-Hill Education
-// ****************************************************************
-#endregion
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Tegrity.Utilities
+namespace SpTools.Validation
 {
 	/// <summary>
 	/// Validation utility
 	/// </summary>
 	public static class Validator
 	{
-		////////////////////////////////////////////////////////////
-		// Public Methods/Atributes
-		////////////////////////////////////////////////////////////
-
 		/// <summary>
 		/// Validates that parameter is not null.
 		/// Usage: Validator.IsNotNull(param, () => param).

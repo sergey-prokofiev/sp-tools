@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
-using Jet.Puzzles.Disposable;
+using SpTools.Disposable;
 
-namespace Jet.Puzzles.Multithreading
+namespace SpTools.Multithreading
 {
 	/// <summary>
 	/// Helper to handle lock. It tries to acquire lock in .ctor and release it in Dispose().

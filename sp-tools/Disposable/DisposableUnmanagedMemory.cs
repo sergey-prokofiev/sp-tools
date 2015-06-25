@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using NLog;
 
-namespace Jet.Puzzles.Disposable
+namespace SpTools.Disposable
 {
 	/// <summary>
 	/// Helper which allocate/dispose unmanaged memory.

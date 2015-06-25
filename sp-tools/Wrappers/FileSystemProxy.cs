@@ -1,34 +1,17 @@
-﻿#region File Description & License
-// ****************************************************************
-// DESC: FileSystemProxy.cs implementation.
-//  
-// © 2013 McGraw-Hill Education
-// ****************************************************************
-#endregion
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NLog;
-using Tegrity.Internal.Contract.FileSystem;
 
-namespace Tegrity.Internal.Platform.FileSystem
+namespace SpTools.Wrappers
 {
 	/// <summary>
 	/// Wrapper on file system
 	/// </summary>
 	public class FileSystemProxy : IFileSystemProxy
 	{
-		////////////////////////////////////////////////////////////
-		// Constants, Enums and Class members
-		////////////////////////////////////////////////////////////
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-		////////////////////////////////////////////////////////////
-		// Public Methods/Atributes
-		////////////////////////////////////////////////////////////
-		
 		/// <summary>
 		/// <see cref="IFileSystemProxy"/>
 		/// </summary>
