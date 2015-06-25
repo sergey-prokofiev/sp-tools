@@ -5,7 +5,7 @@ using System.Globalization;
 namespace SpTools.Comparision
 {
 	/// <summary>
-	/// Converts the value of an string type into a byte array type
+	/// Converts the value of an string type into a byte array type. Usefull for configuration sections.
 	/// </summary>
 	public class StringBytesArrayTypeConverter : TypeConverter
 	{
