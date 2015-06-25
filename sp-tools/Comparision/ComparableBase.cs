@@ -4,7 +4,7 @@
 	/// Base class for which simplifies implementation of object's comparision
 	/// </summary>
 	/// <typeparam name="TRealType">Real type of the object</typeparam>
-	public abstract class ComparableBase<TRealType>
+	public abstract class ComparableBase<TRealType> where TRealType : ComparableBase<TRealType>
 	{
 		/// <summary>
 		/// <see cref="object.Equals(object)"/>
@@ -44,6 +44,5 @@
 		/// Should be overrided to get hash code
 		/// </summary>
 		protected abstract int GetHash();
-
 	}
 }
