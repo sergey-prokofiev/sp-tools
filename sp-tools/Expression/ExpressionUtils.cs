@@ -58,8 +58,8 @@ namespace SpTools.Expression
 		/// <returns></returns>
 		public static Expression<Func<T, bool>> GetWhereExpression<T>(string property, object value) where T : class
 		{
-			Validator.IsNotNullOrWhiteSpace(property, () => property);
-			Validator.IsNotNull(value, () => value);
+			ParametersValidator.IsNotNullOrWhiteSpace(property, () => property);
+            ParametersValidator.IsNotNull(value, () => value);
 
 			var propertyInfo = typeof(T).GetProperty(property);
 
@@ -75,8 +75,8 @@ namespace SpTools.Expression
 		/// <returns></returns>
 		public static Expression<Func<T, bool>> GetWhereExpression<T>(PropertyInfo property, object value) where T : class
 		{
-			Validator.IsNotNull(property, () => property);
-			Validator.IsNotNull(value, () => value);
+            ParametersValidator.IsNotNull(property, () => property);
+            ParametersValidator.IsNotNull(value, () => value);
 
 			var parameter = System.Linq.Expressions.Expression.Parameter(typeof(T), "x");
 			var propertyExpression = System.Linq.Expressions.Expression.MakeMemberAccess(parameter, property);

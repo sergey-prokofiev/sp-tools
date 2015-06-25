@@ -38,9 +38,11 @@ namespace SpTools.Disposable
 
 		private void Dispose(bool disposing)
 		{
-			if (Disposed)
-				return;
-			DisposeResources(disposing);
+		    if (Disposed)
+		    {
+		        return;
+		    }
+		    DisposeResources(disposing);
 			Disposed = true;
 		}
 	}

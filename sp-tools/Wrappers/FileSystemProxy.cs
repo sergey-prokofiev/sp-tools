@@ -10,8 +10,6 @@ namespace SpTools.Wrappers
 	/// </summary>
 	public class FileSystemProxy : IFileSystemProxy
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
 		/// <summary>
 		/// <see cref="IFileSystemProxy"/>
 		/// </summary>
@@ -25,7 +23,6 @@ namespace SpTools.Wrappers
 			{
 				result += "\\";
 			}
-			Logger.Debug("Directory '{0}' created successfully", result);
 			return result;
 		}
 
@@ -35,7 +32,6 @@ namespace SpTools.Wrappers
 		public void DeleteFile(string fname)
 		{
 			File.Delete(fname);
-			Logger.Debug("File '{0}' was deleted", fname);
 		}
 
 		/// <summary>
@@ -44,7 +40,6 @@ namespace SpTools.Wrappers
 		public void DeleteDirectory(string dirName)
 		{
 			Directory.Delete(dirName, true);
-			Logger.Debug("Directory '{0}' was deleted", dirName);
 		}
 
 		/// <summary>

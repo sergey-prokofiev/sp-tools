@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 namespace SpTools.Validation
 {
 	/// <summary>
-	/// Validation utility
+	/// Utility that simplify parameters validation
 	/// </summary>
-	public static class Validator
+	public static class ParametersValidator
 	{
 		/// <summary>
 		/// Validates that parameter is not null.
@@ -17,7 +17,6 @@ namespace SpTools.Validation
 		/// <typeparam name="T">Parameter type.</typeparam>
 		/// <param name="parameter">Parameter value.</param>
 		/// <param name="parameterExpression">Expression to determine parameter name.</param>
-		// ReSharper disable UnusedParameter.Global
 		public static void IsNotNull<T>(T parameter, Expression<Func<T>> parameterExpression) where T : class 
 		{
 			if (parameter == null)
@@ -83,6 +82,5 @@ namespace SpTools.Validation
 			var body = (MemberExpression)expression.Body;
 			return body.Member.Name;
 		}
-		// ReSharper restore UnusedParameter.Global
 	}
 }

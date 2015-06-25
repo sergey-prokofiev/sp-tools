@@ -11,7 +11,6 @@ namespace SpTools.Disposable
 	/// </summary>
 	public class DisposableSecurityString : DisposableResource
 	{
-		private static readonly Logger _log = LogManager.GetCurrentClassLogger(); 
 		private readonly IntPtr _passwordPointer;
 
 		/// <summary>
@@ -25,7 +24,6 @@ namespace SpTools.Disposable
 		/// <param name="source">Source secure string</param>
 		public DisposableSecurityString(SecureString source)
 		{
-			_log.Trace("Creating secure string wrapper");
 			_passwordPointer = Marshal.SecureStringToBSTR(source);
 			DecriptedString = Marshal.PtrToStringBSTR(_passwordPointer);
 		}
@@ -35,7 +33,6 @@ namespace SpTools.Disposable
 		/// </summary>
 		protected override void DisposeResources(bool disposeManagedResources)
 		{
-			_log.Trace("Disposing secure string wrapper");
 			Marshal.ZeroFreeBSTR(_passwordPointer);
 		}
 	}

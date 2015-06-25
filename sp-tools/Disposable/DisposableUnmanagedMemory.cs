@@ -8,7 +8,6 @@ namespace SpTools.Disposable
 	/// </summary>
 	public class DisposableUnmanagedMemory : DisposableResource
 	{
-		private static readonly Logger _logger = LogManager.GetCurrentClassLogger(); 
 		private readonly bool _useAllocCoTaskMem;
 
 		/// <summary>
@@ -35,12 +34,10 @@ namespace SpTools.Disposable
 		{
 			_useAllocCoTaskMem = useCOMMemoryCleaner;
 			Handler = allocatedPointer;
-			_logger.Trace("Created UnmanagedMemoryHelper, use AllocCoTaskMem={0}", _useAllocCoTaskMem);
 		}
 
 		protected override void DisposeResources(bool disposeManagedResources)
 		{
-			_logger.Trace("Disposing UnmanagedMemoryHelper");
 			if (_useAllocCoTaskMem)
 			{
 				Marshal.FreeCoTaskMem(Handler);

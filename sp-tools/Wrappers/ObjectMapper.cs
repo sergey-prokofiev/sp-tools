@@ -4,7 +4,7 @@ namespace SpTools.Wrappers
 	/// <summary>
 	/// Maps objects using AutoMapper.
 	/// </summary>
-	public class ObjectMapper : IObjectMapper
+	public class AutoMapperObjectMapper : IObjectMapper
 	{
 		////////////////////////////////////////////////////////////
 		// Public Methods/Atributes
