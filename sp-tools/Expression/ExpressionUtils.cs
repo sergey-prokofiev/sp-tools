@@ -19,12 +19,34 @@ namespace SpTools.Expression
 		/// <returns>Join of two expressions with logical And.</returns>
 		public static Expression<Func<T, bool>> And<T>(Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
 		{
-			var andExpression = System.Linq.Expressions.Expression.And(first.Body, second.Body);
+            ParametersValidator.IsNotNull(first, () => first);
+            ParametersValidator.IsNotNull(second, () => second);
+
+            var invokedExpr = System.Linq.Expressions.Expression.Invoke(second, first.Parameters);
+            var andExpression = System.Linq.Expressions.Expression.AndAlso(first.Body, invokedExpr);
 			var result = System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(andExpression, first.Parameters[0]);
 			return result;
 		}
 
-		/// <summary>
+        /// <summary>
+        /// Joins two expressions with logical Or.
+        /// </summary>
+        /// <typeparam name="T">Object type.</typeparam>
+        /// <param name="first">First expression.</param>
+        /// <param name="second">Second expression.</param>
+        /// <returns>Join of two expressions with logical And.</returns>
+        public static Expression<Func<T, bool>> Or<T>(Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
+        {
+            ParametersValidator.IsNotNull(first, () => first);
+            ParametersValidator.IsNotNull(second, () => second);
+
+            var invokedExpr = System.Linq.Expressions.Expression.Invoke(second, first.Parameters);
+            var andExpression = System.Linq.Expressions.Expression.OrElse(first.Body, invokedExpr);
+            var result = System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(andExpression, first.Parameters[0]);
+            return result;
+        }
+
+        /// <summary>
 		/// Gets property info based on property expression.
 		/// </summary>
 		/// <typeparam name="TEntity">Entity type.</typeparam>
@@ -33,7 +55,9 @@ namespace SpTools.Expression
 		/// <returns>Member info.</returns>
 		public static MemberInfo GetMemberInfo<TEntity, TProperty>(Expression<Func<TEntity, TProperty>> memberExpression)
 		{
-			var memberAccess = (MemberExpression) memberExpression.Body;
+            ParametersValidator.IsNotNull(memberExpression, () => memberExpression);
+
+            var memberAccess = (MemberExpression)memberExpression.Body;
 			return memberAccess.Member;
 		}
 
@@ -46,7 +70,9 @@ namespace SpTools.Expression
 		/// <returns>Member name.</returns>
 		public static string GetMemberName<TEntity, TProperty>(Expression<Func<TEntity, TProperty>> memberExpression)
 		{
-			return GetMemberInfo(memberExpression).Name;
+            ParametersValidator.IsNotNull(memberExpression, () => memberExpression);
+
+            return GetMemberInfo(memberExpression).Name;
 		}
 
 		/// <summary>

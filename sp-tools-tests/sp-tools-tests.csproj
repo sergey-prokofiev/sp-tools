@@ -60,6 +60,7 @@
     <Compile Include="Disposable\DisposableResourceTests.cs" />
     <Compile Include="Disposable\DisposableSecurityStringTests.cs" />
     <Compile Include="Disposable\DisposableUnmanagedMemoryTests.cs" />
+    <Compile Include="Expression\ExpressionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

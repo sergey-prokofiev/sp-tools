@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
-using SpTools.Disposable;
+using SpTools.Validation;
 
-namespace SpTools.Multithreading
+namespace SpTools.Disposable
 {
 	/// <summary>
 	/// Helper to handle lock. It tries to acquire lock in .ctor and release it in Dispose().
@@ -12,6 +12,7 @@ namespace SpTools.Multithreading
 		private readonly SlimLockMode _mode;
 		private static readonly TimeSpan DefaultTimeout = new TimeSpan(0, 1, 0);
 		private readonly TimeSpan _timeout;
+        private ReaderWriterLockSlim Lock { get; set; }
 
 		/// <summary>
 		/// .ctor. Try to acquire lock with default timeout (1h).
@@ -48,18 +49,12 @@ namespace SpTools.Multithreading
 		/// <param name="timeout">Timeout to acquire lock</param>
 		public DisposableReaderWriterLockSlim(ReaderWriterLockSlim alock, TimeSpan timeout, SlimLockMode mode = SlimLockMode.Read)
 		{
-			if (alock == null)
-				throw new ArgumentNullException("alock");
-			Lock = alock;
+		    ParametersValidator.IsNotNull(alock, () => alock);
+            Lock = alock;
 			_mode = mode;
 			_timeout = timeout;
 			AcquireLock();
 		}
-
-		/// <summary>
-		/// Processed lock
-		/// </summary>
-		private ReaderWriterLockSlim Lock { get; set; }
 
 		/// <summary>
 		/// Release lock, accured in .ctor
@@ -109,8 +104,10 @@ namespace SpTools.Multithreading
 				default:
 					throw new InvalidOperationException("Unsupported lock type");
 			}
-			if (!result)
-				throw new ApplicationException("Cannot acquire lock");
+		    if (!result)
+		    {
+		        throw new ApplicationException("Cannot acquire lock");
+		    }
 		}
 	}
 }

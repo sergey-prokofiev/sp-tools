@@ -1,4 +1,4 @@
-﻿namespace SpTools.Multithreading
+﻿namespace SpTools.Disposable
 {
 	/// <summary>
 	/// Type of lock
