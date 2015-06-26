@@ -12,11 +12,11 @@ namespace SpTools.Disposable
 	public class DisposableSecurityString : DisposableResource
 	{
 		private readonly IntPtr _passwordPointer;
-
+	    private string _str;
 		/// <summary>
 		/// Decripted string. Valid until dispose not called.
 		/// </summary>
-		public string DecriptedString { get; private set; }
+		public string DecriptedString { get {return _str;} }
 
 		/// <summary>
 		/// Creates a wrapper.
@@ -25,7 +25,7 @@ namespace SpTools.Disposable
 		public DisposableSecurityString(SecureString source)
 		{
 			_passwordPointer = Marshal.SecureStringToBSTR(source);
-			DecriptedString = Marshal.PtrToStringBSTR(_passwordPointer);
+            _str = Marshal.PtrToStringBSTR(_passwordPointer);
 		}
 
 		/// <summary>
@@ -33,7 +33,8 @@ namespace SpTools.Disposable
 		/// </summary>
 		protected override void DisposeResources(bool disposeManagedResources)
 		{
-			Marshal.ZeroFreeBSTR(_passwordPointer);
+		    _str = String.Empty;
+            Marshal.ZeroFreeBSTR(_passwordPointer);
 		}
 	}
 }

@@ -46,6 +46,7 @@ namespace SpTools.Disposable
 			{
 				Marshal.FreeHGlobal(Handler);
 			}
+            Handler = IntPtr.Zero;
 		}
 	}
 }

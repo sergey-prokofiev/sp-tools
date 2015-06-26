@@ -27,18 +27,14 @@ namespace sp_tools_tests.Comparision
     public class ComparableTestClass2 : ComparableBase<ComparableTestClass2>
     {
         public int Value;
-        public bool EqualsCalled = false;
-        public bool GetHashCalled = false;
 
         protected override bool Equals(ComparableTestClass2 other)
         {
-            EqualsCalled = true;
             return Value == other.Value;
         }
 
         protected override int GetHash()
         {
-            GetHashCalled = true;
             return Value.GetHashCode();
         }
     }

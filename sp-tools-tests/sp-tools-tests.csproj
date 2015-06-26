@@ -57,6 +57,9 @@
   <ItemGroup>
     <Compile Include="Comparision\ComparisionBaseTests.cs" />
     <Compile Include="Comparision\StringBytesArrayTypeConvertorTest.cs" />
+    <Compile Include="Disposable\DisposableResourceTests.cs" />
+    <Compile Include="Disposable\DisposableSecurityStringTests.cs" />
+    <Compile Include="Disposable\DisposableUnmanagedMemoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
