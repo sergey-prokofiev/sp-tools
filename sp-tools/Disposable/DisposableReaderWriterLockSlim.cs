@@ -82,14 +82,12 @@ namespace SpTools.Disposable
 				case SlimLockMode.Write:
 					Lock.ExitWriteLock();
 					break;
-				default:
-					throw new InvalidOperationException("Unsupported lock type");
 			}
 		}
 
 		private void AcquireLock()
 		{
-			bool result;
+		    var result = false;
 			switch (_mode)
 			{
 				case SlimLockMode.Read:
@@ -101,12 +99,10 @@ namespace SpTools.Disposable
 				case SlimLockMode.Write:
 					result = Lock.TryEnterWriteLock(_timeout);
 					break;
-				default:
-					throw new InvalidOperationException("Unsupported lock type");
 			}
 		    if (!result)
 		    {
-		        throw new ApplicationException("Cannot acquire lock");
+		        throw new InvalidOperationException("Cannot acquire lock");
 		    }
 		}
 	}
