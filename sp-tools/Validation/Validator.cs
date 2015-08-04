@@ -58,7 +58,7 @@ namespace SpTools.Validation
 		/// <param name="parameterExpression">Expression to determine parameter name.</param>
 		public static void IsNotNullOrWhiteSpace(string parameter, Expression<Func<string>> parameterExpression)
 		{
-			if (string.IsNullOrWhiteSpace(parameter))
+			if (String.IsNullOrWhiteSpace(parameter))
 			{
 				throw new ArgumentNullException(GetMemberName(parameterExpression));
 			}

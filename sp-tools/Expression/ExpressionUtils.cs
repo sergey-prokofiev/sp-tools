@@ -82,14 +82,14 @@ namespace SpTools.Expression
 		/// <param name="property">Property name.</param>
 		/// <param name="value">Object value.</param>
 		/// <returns></returns>
-		public static Expression<Func<T, bool>> GetWhereExpression<T>(string property, object value) where T : class
+		public static Expression<Func<T, bool>> GetWhereEqualExpression<T>(string property, object value) where T : class
 		{
 			ParametersValidator.IsNotNullOrWhiteSpace(property, () => property);
             ParametersValidator.IsNotNull(value, () => value);
 
 			var propertyInfo = typeof(T).GetProperty(property);
 
-			return GetWhereExpression<T>(propertyInfo, value);
+			return GetWhereEqualExpression<T>(propertyInfo, value);
 		}
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace SpTools.Expression
 		/// <param name="property">Property info.</param>
 		/// <param name="value">Object value.</param>
 		/// <returns></returns>
-		public static Expression<Func<T, bool>> GetWhereExpression<T>(PropertyInfo property, object value) where T : class
+		public static Expression<Func<T, bool>> GetWhereEqualExpression<T>(PropertyInfo property, object value) where T : class
 		{
             ParametersValidator.IsNotNull(property, () => property);
             ParametersValidator.IsNotNull(value, () => value);

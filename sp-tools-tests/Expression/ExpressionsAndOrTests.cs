@@ -7,14 +7,14 @@ using System.Linq.Expressions;
 
 namespace sp_tools_tests.Expression
 {
-    public class Helper
-    {
-        public int Value { get; set; }
-        public int Value2 { get; set; }
-    }
     [TestClass]
-    public class ExpressionsTests
+    public class ExpressionsAndOrTests
     {
+        public class Helper
+        {
+            public int Value { get; set; }
+            public int Value2 { get; set; }
+        }
         private List<Helper> GetValues()
         {
             return new List<Helper>
@@ -89,5 +89,7 @@ namespace sp_tools_tests.Expression
             Assert.AreEqual(result[1].Value, 7);
 
         }
+
+
     }
 }
