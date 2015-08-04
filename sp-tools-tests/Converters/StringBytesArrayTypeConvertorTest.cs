@@ -1,9 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SpTools.Comparision;
+using SpTools.Converters;
 
-namespace sp_tools_tests.Comparision
+namespace sp_tools_tests.Converters
 {
     [TestClass]
     public class StringBytesArrayTypeConvertorTest

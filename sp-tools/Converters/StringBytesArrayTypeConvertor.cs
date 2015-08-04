@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 
-namespace SpTools.Comparision
+namespace SpTools.Converters
 {
 	/// <summary>
 	/// Converts the value of an string type into a byte array type. Usefull for configuration sections.

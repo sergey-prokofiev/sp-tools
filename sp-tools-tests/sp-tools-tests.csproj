@@ -65,7 +65,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Comparision\ComparisionBaseTests.cs" />
-    <Compile Include="Comparision\StringBytesArrayTypeConvertorTest.cs" />
+    <Compile Include="Converters\StringBytesArrayTypeConvertorTest.cs" />
     <Compile Include="Disposable\DisposableReaderWriterLockSlimTests.cs" />
     <Compile Include="Disposable\DisposableResourceTests.cs" />
     <Compile Include="Disposable\DisposableSecurityStringTests.cs" />

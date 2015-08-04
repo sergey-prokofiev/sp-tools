@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comparision\ComparableBase.cs" />
-    <Compile Include="Comparision\StringBytesArrayTypeConvertor.cs" />
+    <Compile Include="Converters\StringBytesArrayTypeConvertor.cs" />
     <Compile Include="Disposable\DisposableResource.cs" />
     <Compile Include="Disposable\DisposableSecurityString.cs" />
     <Compile Include="Disposable\DisposableUnmanagedMemory.cs" />
