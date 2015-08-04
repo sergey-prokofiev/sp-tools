@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\ParametersValidatorTests.cs" />
     <Compile Include="Wrappers\AutoMapperObjectMapperTests.cs" />
+    <Compile Include="Wrappers\FileSystemProxyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sp-tools\sp-tools.csproj">

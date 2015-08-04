@@ -57,9 +57,10 @@ namespace SpTools.Wrappers
 		/// <summary>
 		/// <see cref="IFileSystemProxy"/>
 		/// </summary>
-		public IReadOnlyCollection<string> FindFiles(string dir, string mask)
+		public IReadOnlyCollection<string> FindFiles(string dir, string mask, bool searchInSubdirs)
 		{
-			var files = Directory.EnumerateFiles(dir, mask, SearchOption.TopDirectoryOnly);
+		    var opt = searchInSubdirs ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+            var files = Directory.EnumerateFiles(dir, mask, opt);
 			return files.ToArray();
 		}
 
