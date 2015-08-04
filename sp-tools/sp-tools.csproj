@@ -54,7 +54,7 @@
     <Compile Include="Disposable\DisposableReaderWriterLockSlim.cs" />
     <Compile Include="Disposable\SlimLockMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="Validation\ParametersValidator.cs" />
     <Compile Include="Wrappers\FileSystemProxy.cs" />
     <Compile Include="Wrappers\IFileSystemProxy.cs" />
     <Compile Include="Wrappers\IObjectMapper.cs" />
