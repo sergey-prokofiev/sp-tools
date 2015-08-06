@@ -15,11 +15,26 @@ namespace sp_tools_tests.Validation
         }
 
         [TestMethod]
+        public void OneParamIsNotNullPassTest()
+        {
+            var obj = new object();
+            ParametersValidator.IsNotNull(() => obj);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void IsNotNullThrowTest()
         {
             object obj = null;
             ParametersValidator.IsNotNull(obj, () => obj);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void OneParamIsNotNullThrowTest()
+        {
+            object obj = null;
+            ParametersValidator.IsNotNull(() => obj);
         }
 
         [TestMethod]
@@ -46,6 +61,29 @@ namespace sp_tools_tests.Validation
         }
 
         [TestMethod]
+        public void OneParamIsNotNullOrWhiteSpacePassTest()
+        {
+            const string st = "Test String";
+            ParametersValidator.IsNotNullOrWhiteSpace(() => st);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void OneParamIsNotNullOrWhiteSpaceWithNullTest()
+        {
+            string st = null;
+            ParametersValidator.IsNotNullOrWhiteSpace(() => st);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void OneParamIsNotNullOrWhiteSpaceWithEmptyTest()
+        {
+            var st = String.Empty;
+            ParametersValidator.IsNotNullOrWhiteSpace(() => st);
+        }
+
+        [TestMethod]
         public void IsNotNullOrEmptyPassTest()
         {
             const string st = "Test String";
@@ -69,6 +107,29 @@ namespace sp_tools_tests.Validation
         }
 
         [TestMethod]
+        public void OneParamIsNotNullOrEmptyPassTest()
+        {
+            const string st = "Test String";
+            ParametersValidator.IsNotNullOrEmpty(() => st);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void OneParamIsNotNullOrEmptyWithNullTest()
+        {
+            string st = null;
+            ParametersValidator.IsNotNullOrEmpty(() => st);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void OneParamIsNotNullOrEmptyWithEmptyTest()
+        {
+            var st = String.Empty;
+            ParametersValidator.IsNotNullOrEmpty(() => st);
+        }
+
+        [TestMethod]
         public void IsNotEmptyGuidPassTest()
         {
             var id = Guid.NewGuid();
@@ -81,6 +142,21 @@ namespace sp_tools_tests.Validation
         {
             var id = Guid.Empty;
             ParametersValidator.IsNotEmpty(id, () => id);
+        }
+
+        [TestMethod]
+        public void OneParamIsNotEmptyGuidPassTest()
+        {
+            var id = Guid.NewGuid();
+            ParametersValidator.IsNotEmpty(() => id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void OneParamIsNotEmptyGuidTest()
+        {
+            var id = Guid.Empty;
+            ParametersValidator.IsNotEmpty(() => id);
         }
 
         [TestMethod]
@@ -104,6 +180,28 @@ namespace sp_tools_tests.Validation
         {
             var array = new object[] { };
             ParametersValidator.IsNotNullOrEmpty(array, () => array);
+        }
+        [TestMethod]
+        public void OneParamIsNotNullOrEmptyIEnumerablePassTest()
+        {
+            var array = new[] { "one", "two" };
+            ParametersValidator.IsNotNullOrEmpty(() => array);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void OneParamIsNullIEnumerableTest()
+        {
+            object[] array = null;
+            ParametersValidator.IsNotNullOrEmpty(() => array);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void OneParamIsEmptyIEnumerableTest()
+        {
+            var array = new object[] { };
+            ParametersValidator.IsNotNullOrEmpty(() => array);
         }
     }
 }
