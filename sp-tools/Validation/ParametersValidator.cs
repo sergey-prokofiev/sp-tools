@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace SpTools.Validation
 {
@@ -152,8 +153,18 @@ namespace SpTools.Validation
 
         private static T GetMemberValue<T>(Expression<Func<T>> expression) 
         {
-            var value = expression.Compile().Invoke();
-            return value;
+            var memberSelector = expression.Body as MemberExpression;
+            if (memberSelector != null)
+            {
+                var constantSelector = (ConstantExpression) memberSelector.Expression;
+                var value = ((FieldInfo)memberSelector.Member).GetValue(constantSelector.Value);
+                return (T)value;
+            }
+            else
+            {
+                var value = ((ConstantExpression)expression.Body).Value;
+                return (T)value;
+            }
         }
     }
 }
