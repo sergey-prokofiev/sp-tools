@@ -69,6 +69,7 @@
     <Compile Include="Disposable\DisposableReaderWriterLockSlimTests.cs" />
     <Compile Include="Disposable\DisposableResourceTests.cs" />
     <Compile Include="Disposable\DisposableSecurityStringTests.cs" />
+    <Compile Include="Disposable\DisposableUnmanagedComMemoryTests.cs" />
     <Compile Include="Disposable\DisposableUnmanagedMemoryTests.cs" />
     <Compile Include="Expression\ExpressionsAndOrTests.cs" />
     <Compile Include="Expression\ExpressionsMembersMetadataTests.cs" />

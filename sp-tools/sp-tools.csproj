@@ -49,6 +49,7 @@
     <Compile Include="Converters\StringBytesArrayTypeConvertor.cs" />
     <Compile Include="Disposable\DisposableResource.cs" />
     <Compile Include="Disposable\DisposableSecurityString.cs" />
+    <Compile Include="Disposable\DisposableUnmanagedComMemory.cs" />
     <Compile Include="Disposable\DisposableUnmanagedMemory.cs" />
     <Compile Include="Expression\ExpressionUtils.cs" />
     <Compile Include="Disposable\DisposableReaderWriterLockSlim.cs" />
