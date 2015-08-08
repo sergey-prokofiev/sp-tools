@@ -13,9 +13,9 @@ namespace SpTools.Disposable
 		protected bool Disposed { get; private set; }
 
 		/// <summary>
-		/// Dispose member-resources
+		/// Dispose member-resources. Generally should not be overriden.
 		/// </summary>
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
