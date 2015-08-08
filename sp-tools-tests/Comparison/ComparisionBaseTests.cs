@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSubstitute;
-using SpTools.Comparision;
+using SpTools.Comparison;
 
-namespace sp_tools_tests.Comparision
+namespace sp_tools_tests.Comparison
 {
 
     public class ComparableTestClass : ComparableBase<ComparableTestClass>

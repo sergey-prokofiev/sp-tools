@@ -18,9 +18,9 @@ namespace sp_tools_tests.Disposable
                 str.AppendChar(c);
             }
             var xx = new DisposableSecurityString(str);
-            Assert.AreEqual(st, xx.DecriptedString);
+            Assert.AreEqual(st, xx.DecryptedString);
             xx.Dispose();
-            Assert.AreEqual(String.Empty, xx.DecriptedString);
+            Assert.AreEqual(String.Empty, xx.DecryptedString);
         }
     }
 }

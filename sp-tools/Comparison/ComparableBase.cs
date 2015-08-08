@@ -1,4 +1,4 @@
-﻿namespace SpTools.Comparision
+﻿namespace SpTools.Comparison
 {
 	/// <summary>
 	/// Base class for which simplifies implementation of object's comparision

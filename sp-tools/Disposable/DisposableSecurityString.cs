@@ -16,7 +16,7 @@ namespace SpTools.Disposable
 		/// <summary>
 		/// Decripted string. Valid until dispose not called.
 		/// </summary>
-		public string DecriptedString { get {return _str;} }
+		public string DecryptedString { get {return _str;} }
 
 		/// <summary>
 		/// Creates a wrapper.

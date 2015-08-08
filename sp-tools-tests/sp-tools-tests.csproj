@@ -64,7 +64,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Comparision\ComparisionBaseTests.cs" />
+    <Compile Include="Comparison\ComparisionBaseTests.cs" />
     <Compile Include="Converters\StringBytesArrayTypeConvertorTest.cs" />
     <Compile Include="Disposable\DisposableReaderWriterLockSlimTests.cs" />
     <Compile Include="Disposable\DisposableResourceTests.cs" />
