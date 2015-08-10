@@ -1,16 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using SpTools.Validation;
 
 namespace SpTools.Disposable
 {
     /// <summary>
-    /// Holds some disposable memebrs and dispose it.
-    /// Handle only direct call of di
+    /// Holds disposable objects and dispose all of them.
     /// </summary>
     public class CompositeDisposable : IDisposable
     {
-        private readonly List<IDisposable> _lst = new List<IDisposable>();
+        private readonly List<IDisposable> _lst;
 
+        /// <summary>
+        /// .ctor
+        /// </summary>
+        /// <param name="capacity">Default capacity</param>
+        public CompositeDisposable(int capacity = 0)
+        {
+            _lst = new List<IDisposable>(capacity);
+        }
+
+        /// <summary>
+        /// .ctor
+        /// </summary>
+        /// <param name="items">Array of dispoables </param>
+        public CompositeDisposable(IReadOnlyCollection<IDisposable> items)
+        {
+            ParametersValidator.IsNotNull(items, () => items);
+            _lst = new List<IDisposable>(items);
+        }
         /// <summary>
         /// Adds a disposable to the list of object to be disposed with this one.
         /// </summary>
@@ -19,20 +37,28 @@ namespace SpTools.Disposable
         {
             _lst.Add(d);
         }
-        /*
-        protected override void DisposeResources(bool disposeManagedResources)
-        {
-            //do nothing: Dispose is overriden and call from finzlizer should not be handled  - all list members finalizer should be called automatically too.
-        }
-        */
+
         /// <summary>
-        /// Dispose all members
+        /// Dispose all members. All thrown exceptions are aggregated and AggregateException is thrown if at least one exception occured.
         /// </summary>
         public void Dispose()
         {
+            var ex = new List<Exception>();
             foreach (var d in _lst)
             {
-                d?.Dispose();
+                try
+                {
+                    d?.Dispose();
+                }
+                catch (Exception e)
+                {
+                    ex.Add(e);
+                }
+            }
+            GC.SuppressFinalize(this);
+            if (ex.Count > 0)
+            {
+                throw new AggregateException("One of nested Disposables thown an exception", ex);
             }
         }
     }
