@@ -5,14 +5,14 @@ using SpTools.Validation;
 namespace SpTools.Disposable
 {
 	/// <summary>
-	/// Helper to handle lock. It tries to acquire lock in .ctor and release it in Dispose().
+	/// Helper to handle a slim lock. It tries to acquire lock in .ctor and release it in Dispose().
 	/// </summary>
 	public sealed class DisposableReaderWriterLockSlim : DisposableResource
 	{
 		private readonly SlimLockMode _mode;
 		private static readonly TimeSpan DefaultTimeout = new TimeSpan(0, 1, 0);
 		private readonly TimeSpan _timeout;
-        private ReaderWriterLockSlim Lock { get; set; }
+	    private readonly ReaderWriterLockSlim _lock;
 
 		/// <summary>
 		/// .ctor. Try to acquire lock with default timeout (1h).
@@ -50,7 +50,7 @@ namespace SpTools.Disposable
 		public DisposableReaderWriterLockSlim(ReaderWriterLockSlim alock, TimeSpan timeout, SlimLockMode mode = SlimLockMode.Read)
 		{
 		    ParametersValidator.IsNotNull(alock, () => alock);
-            Lock = alock;
+            _lock = alock;
 			_mode = mode;
 			_timeout = timeout;
 			AcquireLock();
@@ -74,13 +74,13 @@ namespace SpTools.Disposable
 			switch (_mode)
 			{
 				case SlimLockMode.Read:
-					Lock.ExitReadLock();
+                    _lock.ExitReadLock();
 					break;
 				case SlimLockMode.UpgradeableRead:
-					Lock.ExitUpgradeableReadLock();
+                    _lock.ExitUpgradeableReadLock();
 					break;
 				case SlimLockMode.Write:
-					Lock.ExitWriteLock();
+                    _lock.ExitWriteLock();
 					break;
 			}
 		}
@@ -91,13 +91,13 @@ namespace SpTools.Disposable
 			switch (_mode)
 			{
 				case SlimLockMode.Read:
-					result = Lock.TryEnterReadLock(_timeout);
+					result = _lock.TryEnterReadLock(_timeout);
 					break;
 				case SlimLockMode.UpgradeableRead:
-					result = Lock.TryEnterUpgradeableReadLock(_timeout);
+					result = _lock.TryEnterUpgradeableReadLock(_timeout);
 					break;
 				case SlimLockMode.Write:
-					result = Lock.TryEnterWriteLock(_timeout);
+					result = _lock.TryEnterWriteLock(_timeout);
 					break;
 			}
 		    if (!result)
