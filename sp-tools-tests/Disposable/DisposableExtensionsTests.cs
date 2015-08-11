@@ -51,7 +51,7 @@ namespace sp_tools_tests.Disposable
             Assert.IsTrue(b);
             d.Received(1).Dispose();
         }
-
+#region Slim
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void WithReadLockSlimNullLockTest()
@@ -285,5 +285,252 @@ namespace sp_tools_tests.Disposable
             e.WaitOne();
             Assert.IsFalse(l.IsWriteLockHeld);
         }
+        #endregion
+        #region No Slim
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WithReadLockNullLockTest()
+        {
+            ReaderWriterLock l = null;
+            l.WithReadLock(() => { });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WithReadLockNullActionTest()
+        {
+            var l = new ReaderWriterLock();
+            l.WithReadLock(null);
+        }
+
+        [TestMethod]
+        public void WithReadLockSuccessTest()
+        {
+            var l = new ReaderWriterLock();
+            Assert.IsFalse(l.IsReaderLockHeld);
+            l.WithReadLock(() => { Assert.IsTrue(l.IsReaderLockHeld); });
+            Assert.IsFalse(l.IsReaderLockHeld);
+        }
+
+        [TestMethod]
+        public void WithReadLockWithExceptionTest()
+        {
+            var l = new ReaderWriterLock();
+            Assert.IsFalse(l.IsReaderLockHeld);
+            var thrown = false;
+            try
+            {
+                l.WithReadLock(() =>
+                {
+                    Assert.IsTrue(l.IsReaderLockHeld);
+                    throw new InvalidOperationException();
+                });
+            }
+            catch (InvalidOperationException)
+            {
+                thrown = true;
+            }
+            Assert.IsFalse(l.IsReaderLockHeld);
+            Assert.IsTrue(thrown);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WithReadLockTimeoutNullLockTest()
+        {
+            ReaderWriterLock l = null;
+            l.WithReadLock(() => { }, TimeSpan.Zero);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WithReadLockTimeoutNullActionTest()
+        {
+            var l = new ReaderWriterLock();
+            l.WithReadLock(null, TimeSpan.Zero);
+        }
+
+        [TestMethod]
+        public void WithReadLockTimeoutSuccessTest()
+        {
+            var l = new ReaderWriterLock();
+            var e = new AutoResetEvent(false);
+            var lockGetted = false;
+            var t = new Thread(() =>
+            {
+                l.WithReadLock(() =>
+                {
+                    Assert.IsTrue(l.IsReaderLockHeld);
+                    lockGetted = true;
+                }, TimeSpan.FromSeconds(5));
+                e.Set();
+            });
+            l.AcquireWriterLock(100);
+            t.Start();
+            Thread.Sleep(1000);
+            Assert.IsFalse(lockGetted);
+            l.ReleaseWriterLock();
+            e.WaitOne();
+            Assert.IsTrue(lockGetted);
+        }
+
+        [TestMethod]
+        public void WithReadLockTimeoutWithExceptionTest()
+        {
+            var l = new ReaderWriterLock();
+            var e = new AutoResetEvent(false);
+            var lockGetted = false;
+            var t = new Thread(() =>
+            {
+                var b = false;
+                try
+                {
+                    l.WithReadLock(() =>
+                    {
+                        lockGetted = true;
+                        Assert.IsTrue(l.IsReaderLockHeld);
+                        throw new InvalidOperationException();
+                    }, TimeSpan.FromSeconds(5));
+                }
+                catch (InvalidOperationException)
+                {
+                    b = true;
+                }
+                Assert.IsTrue(b);
+                e.Set();
+            });
+            l.AcquireWriterLock(100);
+            t.Start();
+            Thread.Sleep(1000);
+            Assert.IsFalse(lockGetted);
+            l.ReleaseWriterLock();
+            e.WaitOne();
+            Assert.IsFalse(l.IsReaderLockHeld);
+        }
+        
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WithWriteLockNullLockTest()
+        {
+            ReaderWriterLock l = null;
+            l.WithWriteLock(() => { });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WithhWriteLockNullActionTest()
+        {
+            var l = new ReaderWriterLock();
+            l.WithWriteLock(null);
+        }
+
+        [TestMethod]
+        public void WithWriteLockSuccessTest()
+        {
+            var l = new ReaderWriterLock();
+            Assert.IsFalse(l.IsWriterLockHeld);
+            l.WithWriteLock(() => { Assert.IsTrue(l.IsWriterLockHeld); });
+            Assert.IsFalse(l.IsWriterLockHeld);
+        }
+
+        [TestMethod]
+        public void WithWriteLockWithExceptionTest()
+        {
+            var l = new ReaderWriterLock();
+            Assert.IsFalse(l.IsWriterLockHeld);
+            var thrown = false;
+            try
+            {
+                l.WithWriteLock(() =>
+                {
+                    Assert.IsTrue(l.IsWriterLockHeld);
+                    throw new InvalidOperationException();
+                });
+            }
+            catch (InvalidOperationException)
+            {
+                thrown = true;
+            }
+            Assert.IsFalse(l.IsWriterLockHeld);
+            Assert.IsTrue(thrown);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WithWriteLockTimeoutNullLockTest()
+        {
+            ReaderWriterLock l = null;
+            l.WithWriteLock(() => { }, TimeSpan.Zero);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WithWriteLockTimeoutNullActionTest()
+        {
+            var l = new ReaderWriterLock();
+            l.WithWriteLock(null, TimeSpan.Zero);
+        }
+
+        [TestMethod]
+        public void WithWriteLockTimeoutSuccessTest()
+        {
+            var l = new ReaderWriterLock();
+            var e = new AutoResetEvent(false);
+            var lockGetted = false;
+            var t = new Thread(() =>
+            {
+                l.WithWriteLock(() =>
+                {
+                    lockGetted = true;
+                    Assert.IsTrue(l.IsWriterLockHeld);
+                }, TimeSpan.FromSeconds(5));
+                e.Set();
+            });
+            l.AcquireWriterLock(100);
+            t.Start();
+            Thread.Sleep(1000);
+            Assert.IsFalse(lockGetted);
+            l.ReleaseWriterLock();
+            e.WaitOne();
+            Assert.IsTrue(lockGetted);
+            Assert.IsFalse(l.IsWriterLockHeld);
+        }
+
+        [TestMethod]
+        public void WithWriteLockTimeoutWithExceptionTest()
+        {
+            var l = new ReaderWriterLock();
+            var e = new AutoResetEvent(false);
+            var lockGetted = false;
+            var t = new Thread(() =>
+            {
+                var b = false;
+                try
+                {
+                    l.WithWriteLock(() =>
+                    {
+                        lockGetted = true;
+                        Assert.IsTrue(l.IsWriterLockHeld);
+                        throw new InvalidOperationException();
+                    }, TimeSpan.FromSeconds(5));
+                }
+                catch (InvalidOperationException)
+                {
+                    b = true;
+                }
+                Assert.IsTrue(b);
+                e.Set();
+            });
+            l.AcquireWriterLock(100);
+            t.Start();
+            Thread.Sleep(1000);
+            Assert.IsFalse(lockGetted);
+            l.ReleaseWriterLock();
+            e.WaitOne();
+            Assert.IsTrue(lockGetted);
+            Assert.IsFalse(l.IsWriterLockHeld);
+        }
+        
+        #endregion
     }
 }
