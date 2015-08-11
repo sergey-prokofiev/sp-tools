@@ -89,5 +89,70 @@ namespace SpTools.Disposable
             }
         }
 
+
+        /// <summary>
+        /// Wraps action into try/finally statement with getting a read lock in try and releasing in finally.
+        /// </summary>
+        /// <param name="alock">Lock to handle</param>
+        /// <param name="action">Action to execute</param>
+        /// <param name="timeout">Timeout to get lock</param>
+        public static void WithReadLock(this ReaderWriterLock alock, Action action, TimeSpan timeout)
+        {
+            ParametersValidator.IsNotNull(alock, () => alock);
+            ParametersValidator.IsNotNull(action, () => action);
+            using (new DisposableReaderWriterLock(alock, timeout))
+            {
+                action();
+            }
+        }
+
+        /// <summary>
+        /// Wraps action into try/finally statement with getting a read lock in try and releasing in finally. 
+        /// Default timeout of <see cref="DisposableReaderWriterLockSlim"/> is used.
+        /// </summary>
+        /// <param name="alock">Lock to handle</param>
+        /// <param name="action">Action to execute</param>
+        public static void WithReadLock(this ReaderWriterLock alock, Action action)
+        {
+            ParametersValidator.IsNotNull(alock, () => alock);
+            ParametersValidator.IsNotNull(action, () => action);
+            using (new DisposableReaderWriterLock(alock))
+            {
+                action();
+            }
+        }
+
+        /// <summary>
+        /// Wraps action into try/finally statement with getting a write lock in try and releasing in finally. 
+        /// Default timeout of <see cref="DisposableReaderWriterLockSlim"/> is used.
+        /// </summary>
+        /// <param name="alock">Lock to handle</param>
+        /// <param name="action">Action to execute</param>
+        /// <param name="timeout">TImeout to get write lock</param>
+        public static void WithWriteLock(this ReaderWriterLock alock, Action action, TimeSpan timeout)
+        {
+            ParametersValidator.IsNotNull(alock, () => alock);
+            ParametersValidator.IsNotNull(action, () => action);
+            using (new DisposableReaderWriterLock(alock, timeout, LockMode.Write))
+            {
+                action();
+            }
+        }
+
+        /// <summary>
+        /// Wraps action into try/finally statement with getting a write lock in try and releasing in finally. 
+        /// Default timeout of <see cref="DisposableReaderWriterLockSlim"/> is used.
+        /// </summary>
+        /// <param name="alock">Lock to handle</param>
+        /// <param name="action">Action to execute</param>
+        public static void WithWriteLock(this ReaderWriterLock alock, Action action)
+        {
+            ParametersValidator.IsNotNull(alock, () => alock);
+            ParametersValidator.IsNotNull(action, () => action);
+            using (new DisposableReaderWriterLock(alock, LockMode.Write))
+            {
+                action();
+            }
+        }
     }
 }
