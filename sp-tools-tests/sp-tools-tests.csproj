@@ -67,6 +67,7 @@
     <Compile Include="Comparison\ComparisionBaseTests.cs" />
     <Compile Include="Converters\StringBytesArrayTypeConvertorTest.cs" />
     <Compile Include="Disposable\CompositeDisposableTests.cs" />
+    <Compile Include="Disposable\DisposableExtensionsTests.cs" />
     <Compile Include="Disposable\DisposableReaderWriterLockSlimTests.cs" />
     <Compile Include="Disposable\DisposableResourceTests.cs" />
     <Compile Include="Disposable\DisposableSecurityStringTests.cs" />

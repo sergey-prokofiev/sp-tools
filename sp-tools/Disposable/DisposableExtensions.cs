@@ -24,15 +24,6 @@ namespace SpTools.Disposable
             }
         }
 
-        public static void WithReadLock(this ReaderWriterLock alock, Action action)
-        {
-        }
-
-        public static void WithWriteLock(this ReaderWriterLock alock, TimeSpan timeout, Action action)
-        {
-
-        }
-
         /// <summary>
         /// Wraps action into try/finally statement with getting a read lock in try and releasing in finally.
         /// </summary>
