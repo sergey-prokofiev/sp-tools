@@ -62,7 +62,9 @@
     <Compile Include="Disposable\SlimLockMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\ParametersValidator.cs" />
+    <Compile Include="Wrappers\DateTimeProxy.cs" />
     <Compile Include="Wrappers\FileSystemProxy.cs" />
+    <Compile Include="Wrappers\IDateTimeProxy.cs" />
     <Compile Include="Wrappers\IFileSystemProxy.cs" />
     <Compile Include="Wrappers\IObjectMapper.cs" />
     <Compile Include="Wrappers\ObjectMapper.cs" />
