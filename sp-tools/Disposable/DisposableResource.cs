@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Logging;
 
 namespace SpTools.Disposable
 {
@@ -7,6 +8,7 @@ namespace SpTools.Disposable
 	/// </summary>
 	public abstract class DisposableResource : IDisposable
 	{
+		private static readonly ILog Logger = LogManager.GetLogger<DisposableResource>();
 		/// <summary>
 		/// Determine if object alreadfy disposed. Check this property in descendants to determine if resource was already disposed
 		/// </summary>
@@ -38,7 +40,8 @@ namespace SpTools.Disposable
 
 		private void Dispose(bool disposing)
 		{
-		    if (Disposed)
+			Logger.TraceFormat("Dispose called. Disposed = {0} from finalizer={1}, object is {2}", Disposed, !disposing, this);
+			if (Disposed)
 		    {
 		        return;
 		    }

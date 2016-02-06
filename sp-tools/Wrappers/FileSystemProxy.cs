@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Common.Logging;
 
 namespace SpTools.Wrappers
 {
@@ -10,6 +11,7 @@ namespace SpTools.Wrappers
 	/// </summary>
 	public class FileSystemProxy : IFileSystemProxy
 	{
+		private static readonly ILog Logger = LogManager.GetLogger<FileSystemProxy>();
 		/// <summary>
 		/// <see cref="IFileSystemProxy"/>
 		/// </summary>
@@ -23,6 +25,7 @@ namespace SpTools.Wrappers
 			{
 				result += "\\";
 			}
+			Logger.TraceFormat("Temp dir {0} created", result);
 			return result;
 		}
 
@@ -32,6 +35,8 @@ namespace SpTools.Wrappers
 		public void DeleteFile(string fname)
 		{
 			File.Delete(fname);
+			Logger.TraceFormat("File {0} deleted", fname);
+
 		}
 
 		/// <summary>
@@ -40,6 +45,7 @@ namespace SpTools.Wrappers
 		public void DeleteDirectory(string dirName)
 		{
 			Directory.Delete(dirName, true);
+			Logger.TraceFormat("Dir {0} deleted", dirName);
 		}
 
 		/// <summary>

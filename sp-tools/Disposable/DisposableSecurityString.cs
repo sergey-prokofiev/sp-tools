@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Security;
+using Common.Logging;
 
 namespace SpTools.Disposable
 {
@@ -13,6 +14,8 @@ namespace SpTools.Disposable
 	{
 		private readonly IntPtr _passwordPointer;
 	    private string _str;
+		private static readonly ILog Logger = LogManager.GetLogger<DisposableSecurityString>();
+
 		/// <summary>
 		/// Decripted string. Valid until dispose not called.
 		/// </summary>
@@ -26,6 +29,7 @@ namespace SpTools.Disposable
 		{
 			_passwordPointer = Marshal.SecureStringToBSTR(source);
             _str = Marshal.PtrToStringBSTR(_passwordPointer);
+			Logger.TraceFormat("disposable string created");
 		}
 
 		/// <summary>
@@ -35,6 +39,7 @@ namespace SpTools.Disposable
 		{
 		    _str = String.Empty;
             Marshal.ZeroFreeBSTR(_passwordPointer);
+			Logger.TraceFormat("disposable string disposed");
 		}
 	}
 }

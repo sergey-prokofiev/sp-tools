@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Common.Logging;
 using SpTools.Validation;
 
 namespace SpTools.Disposable
@@ -13,6 +14,8 @@ namespace SpTools.Disposable
 		private static readonly TimeSpan DefaultTimeout = new TimeSpan(0, 1, 0);
 		private readonly TimeSpan _timeout;
 	    private readonly ReaderWriterLockSlim _lock;
+		private static readonly ILog Logger = LogManager.GetLogger<DisposableReaderWriterLockSlim>();
+
 
 		/// <summary>
 		/// .ctor. Try to acquire lock with default timeout (1h).
@@ -54,6 +57,7 @@ namespace SpTools.Disposable
 			_mode = mode;
 			_timeout = timeout;
 			AcquireLock();
+			Logger.TraceFormat("lock created timeout={0}, mode ={1}", timeout, mode);
 		}
 
 		/// <summary>
@@ -83,6 +87,7 @@ namespace SpTools.Disposable
                     _lock.ExitWriteLock();
 					break;
 			}
+			Logger.TraceFormat("lock {0} released", _mode);
 		}
 
 		private void AcquireLock()
@@ -100,7 +105,8 @@ namespace SpTools.Disposable
 					result = _lock.TryEnterWriteLock(_timeout);
 					break;
 			}
-		    if (!result)
+			Logger.TraceFormat("lock {0} acured with result {1}", _mode, result);
+			if (!result)
 		    {
 		        throw new InvalidOperationException("Cannot acquire lock");
 		    }

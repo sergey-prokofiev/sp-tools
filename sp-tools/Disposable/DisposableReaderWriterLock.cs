@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Common.Logging;
 using SpTools.Validation;
 
 namespace SpTools.Disposable
@@ -15,6 +16,7 @@ namespace SpTools.Disposable
         private LockCookie _cookie;
 
         private static readonly TimeSpan DefaultTimeout = new TimeSpan(0, 1, 0);
+	    private static readonly ILog Logger = LogManager.GetLogger<DisposableReaderWriterLock>();
 
         /// <summary>
         /// .ctor
@@ -29,6 +31,7 @@ namespace SpTools.Disposable
             _timeout = timeout;
             _mode = mode;
             AcquireLock();
+			Logger.TraceFormat("lock created timeout={0}, mode ={1}", timeout, mode);
         }
 
         /// <summary>
@@ -41,6 +44,7 @@ namespace SpTools.Disposable
         {
             
         }
+
         protected override void DisposeResources(bool disposeManagedResources)
         {
             ReleaseLock();
@@ -60,9 +64,10 @@ namespace SpTools.Disposable
                     _lock.AcquireWriterLock(_timeout);
                     break;
             }
-        }
+			Logger.TraceFormat("lock {0} acured", _mode);
+		}
 
-        private void ReleaseLock()
+		private void ReleaseLock()
         {
             switch (_mode)
             {
@@ -76,6 +81,7 @@ namespace SpTools.Disposable
                     _lock.ReleaseWriterLock();
                     break;
             }
-        }
-    }
+			Logger.TraceFormat("lock {0} released", _mode);
+		}
+	}
 }

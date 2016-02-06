@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Common.Logging;
 using SpTools.Validation;
 
 namespace SpTools.Disposable
@@ -9,7 +10,8 @@ namespace SpTools.Disposable
     /// </summary>
     public static class DisposableExtensions
     {
-        /// <summary>
+	    private static readonly ILog Logger = LogManager.GetLogger(typeof(DisposableExtensions));
+		/// <summary>
         /// Wraps any action into a using statement
         /// </summary>
         /// <param name="d">Disposable to handle</param>
@@ -18,6 +20,7 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(d, ()=>d);
             ParametersValidator.IsNotNull(action, () => action);
+			Logger.TraceFormat("Runnig action {0} with disposable {1}", action, d);
             using (d)
             {
                 action();
@@ -34,7 +37,8 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(alock, () => alock);
             ParametersValidator.IsNotNull(action, () => action);
-            using (new DisposableReaderWriterLockSlim(alock, timeout))
+			Logger.TraceFormat("Runnig action {0} with slim lock {1} and timeout {2} with read lock", action, alock, timeout);
+			using (new DisposableReaderWriterLockSlim(alock, timeout))
             {
                 action();
             }
@@ -50,7 +54,8 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(alock, () => alock);
             ParametersValidator.IsNotNull(action, () => action);
-            using (new DisposableReaderWriterLockSlim(alock))
+			Logger.TraceFormat("Runnig action {0} with slim lock {1} with read lock", action, alock);
+			using (new DisposableReaderWriterLockSlim(alock))
             {
                 action();
             }
@@ -67,7 +72,8 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(alock, () => alock);
             ParametersValidator.IsNotNull(action, () => action);
-            using (new DisposableReaderWriterLockSlim(alock, timeout, SlimLockMode.Write))
+			Logger.TraceFormat("Runnig action {0} with slim lock {1} and timeout {2} with write lock", action, alock, timeout);
+			using (new DisposableReaderWriterLockSlim(alock, timeout, SlimLockMode.Write))
             {
                 action();
             }
@@ -83,7 +89,8 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(alock, () => alock);
             ParametersValidator.IsNotNull(action, () => action);
-            using (new DisposableReaderWriterLockSlim(alock, SlimLockMode.Write))
+			Logger.TraceFormat("Runnig action {0} with slim lock {1} with write lock", action, alock);
+			using (new DisposableReaderWriterLockSlim(alock, SlimLockMode.Write))
             {
                 action();
             }
@@ -100,7 +107,8 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(alock, () => alock);
             ParametersValidator.IsNotNull(action, () => action);
-            using (new DisposableReaderWriterLock(alock, timeout))
+			Logger.TraceFormat("Runnig action {0} with lock {1} with read lock and timeout {2}", action, alock, timeout);
+			using (new DisposableReaderWriterLock(alock, timeout))
             {
                 action();
             }
@@ -116,7 +124,8 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(alock, () => alock);
             ParametersValidator.IsNotNull(action, () => action);
-            using (new DisposableReaderWriterLock(alock))
+			Logger.TraceFormat("Runnig action {0} with lock {1} with read lock", action, alock);
+			using (new DisposableReaderWriterLock(alock))
             {
                 action();
             }
@@ -133,7 +142,8 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(alock, () => alock);
             ParametersValidator.IsNotNull(action, () => action);
-            using (new DisposableReaderWriterLock(alock, timeout, LockMode.Write))
+			Logger.TraceFormat("Runnig action {0} with lock {1} with write lock and timeout {2}", action, alock, timeout);
+			using (new DisposableReaderWriterLock(alock, timeout, LockMode.Write))
             {
                 action();
             }
@@ -149,7 +159,8 @@ namespace SpTools.Disposable
         {
             ParametersValidator.IsNotNull(alock, () => alock);
             ParametersValidator.IsNotNull(action, () => action);
-            using (new DisposableReaderWriterLock(alock, LockMode.Write))
+			Logger.TraceFormat("Runnig action {0} with lock {1} with read lock", action, alock);
+			using (new DisposableReaderWriterLock(alock, LockMode.Write))
             {
                 action();
             }
